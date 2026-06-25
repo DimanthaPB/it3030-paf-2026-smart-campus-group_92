@@ -1,316 +1,536 @@
 # Smart Campus Operations Hub
 
-Smart Campus Operations Hub is a full-stack university operations platform built for the SLIIT `IT3030 - PAF 2026` assignment. Based on the assignment scope and the implemented codebase, the system brings together resource management, facility booking, maintenance ticketing, notifications, and role-based access control in one web application.
+## Overview
 
-The project is designed around day-to-day campus workflows such as:
+Smart Campus Operations Hub is a full-stack university operations management platform developed for the **SLIIT IT3030 - Programming Applications and Frameworks (PAF) 2026 Assignment**.
 
-- Managing lecture halls, labs, meeting rooms, and equipment
-- Letting students or staff discover active resources and request bookings
-- Allowing admins to approve, reject, or cancel bookings
-- Reporting maintenance or incident issues with comments and attachments
-- Delivering in-app notifications for booking, ticket, comment, and system events
-- Supporting secure authentication with JWT and Google OAuth 2.0
+The platform is designed to streamline campus operations by integrating facility management, resource booking, maintenance ticketing, notifications, and role-based access control into a single centralized system.
 
-## Project Modules
+The application enables students, staff, technicians, managers, and administrators to efficiently manage university resources such as lecture halls, laboratories, meeting rooms, and equipment while providing a structured workflow for incident reporting and maintenance operations.
 
-### 1. Resource Management
+---
 
-Admins can:
+## Features
 
-- Create, update, search, and delete resources
-- Manage resource type, capacity, location, status, and availability windows
-- Maintain lecture halls, labs, meeting rooms, and equipment
+### Resource Management
 
-Users can:
+* Create, update, search, and deactivate campus resources
+* Manage lecture halls, laboratories, meeting rooms, and equipment
+* Track resource capacity, location, availability, and status
+* Advanced filtering and search capabilities
 
-- Browse the active resource catalogue
-- Search resources by type, keyword, location, and capacity
+### Booking Management
 
-### 2. Booking Management
+* Submit resource booking requests
+* View and manage personal bookings
+* Edit pending bookings
+* Cancel approved bookings with reasons
+* Admin approval and rejection workflow
+* Booking conflict detection and validation
 
-Users can:
+### Maintenance & Incident Ticketing
 
-- Create booking requests for resources
-- View their own bookings
-- Edit pending bookings
-- Cancel approved bookings with reasons
+* Create maintenance and incident tickets
+* Upload evidence attachments
+* Assign technicians to tickets
+* Status tracking and lifecycle management
+* Comment and discussion system
+* Resolution note management
 
-Admins can:
+### Notification System
 
-- Review all booking requests
-- Approve or reject bookings
-- Monitor booking conflicts and availability
+* Real-time in-app notifications
+* Booking approval and rejection alerts
+* Ticket status update notifications
+* Comment event notifications
+* User notification preference management
 
-### 3. Incident Ticketing
+### Authentication & Authorization
 
-Users can:
+* Email/password authentication
+* Google OAuth 2.0 login
+* JWT-based API security
+* Role-Based Access Control (RBAC)
 
-- Create maintenance or incident tickets
-- Add details such as title, description, category, priority, and related resource
-- Upload evidence attachments
-- Follow updates through comments and status changes
+### Administration Dashboard
 
-Admins or technical staff workflows include:
+* Resource management
+* User management
+* Booking monitoring
+* Ticket assignment and tracking
+* System-wide operational oversight
 
-- Viewing and managing ticket progress
-- Updating status through the incident lifecycle
-- Adding comments and operational follow-up
+---
 
-### 4. Notifications
+## Supported User Roles
 
-The system includes an in-app notification center for:
+| Role       | Permissions                                                                      |
+| ---------- | -------------------------------------------------------------------------------- |
+| USER       | Browse resources, create bookings, submit tickets, manage personal notifications |
+| ADMIN      | Manage resources, bookings, users, technicians, and monitor campus operations    |
+| TECHNICIAN | Handle assigned maintenance tickets and update ticket statuses                   |
+| MANAGER    | Operational monitoring and management workflows                                  |
 
-- Booking approvals, rejections, and cancellations
-- Ticket updates and comment events
-- System alerts such as newly added resources
+---
 
-Users can also manage notification preferences for:
-
-- Booking alerts
-- Ticket alerts
-- System alerts
-
-### 5. Authentication and Authorization
-
-The platform supports:
-
-- Email/password registration and login
-- Google OAuth 2.0 login
-- JWT-based API authentication
-- Role-based access control
-
-Current role support in the backend includes:
-
-- `USER`
-- `ADMIN`
-- `TECHNICIAN`
-- `MANAGER`
-
-The current UI primarily exposes `USER` and `ADMIN` flows, with shared preference and notification support across authenticated roles.
-
-## Tech Stack
+## Technology Stack
 
 ### Backend
 
-- Java 21
-- Spring Boot 4
-- Spring Web MVC
-- Spring Security
-- Spring Data JPA
-- PostgreSQL
-- JWT (`jjwt`)
-- Google OAuth 2.0 client
-- Lombok
-- Maven Wrapper
+* Java 21
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* PostgreSQL
+* JWT Authentication
+* Google OAuth 2.0
+* Lombok
+* Maven
 
 ### Frontend
 
-- React 19
-- Vite
-- React Router
-- Axios
-- Lucide React
+* React 19
+* Vite
+* React Router
+* Axios
+* Lucide React
+
+### DevOps & Tools
+
+* Git & GitHub
+* GitHub Actions
+* Postman
+* JUnit Testing
+
+---
+
+## System Architecture
+
+```text
+React Frontend
+       │
+       ▼
+Spring Boot REST API
+       │
+       ▼
+Business Logic Layer
+       │
+       ▼
+PostgreSQL Database
+```
+
+### Architecture Components
+
+* React-based Client Application
+* Spring Boot REST API
+* OAuth 2.0 Authentication Provider
+* Business Logic Layer
+* PostgreSQL Persistence Layer
+* File Upload Storage
+* Notification Service
+
+---
 
 ## Project Structure
 
 ```text
-Y3S1-PAF-IT3030-Smart-Campus/
-|-- backend/     Spring Boot REST API
-|-- frontend/    React + Vite client
-`-- README.md
+Smart-Campus-Operations-Hub/
+│
+├── backend/
+│   ├── src/main/java/
+│   ├── src/main/resources/
+│   ├── uploads/
+│   ├── application.yml
+│   └── env.properties
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── vite.config.js
+│
+├── .github/
+│   └── workflows/
+│
+└── README.md
 ```
 
-## Key Features Implemented
+---
 
-- Resource catalogue with admin CRUD operations
-- User-facing active resource catalogue
-- Booking request workflow with validation and conflict checking
-- Booking approval, rejection, and cancellation handling
-- Ticket and comment workflows
-- Attachment upload support for tickets
-- Notification center with preference management
-- JWT login and Google OAuth login
-- Role-aware frontend routing
-- Admin user management
+## Core Modules
+
+### Facilities & Assets Catalogue
+
+* Resource browsing
+* Search and filtering
+* Capacity and availability management
+* Resource administration
+
+### Booking Management
+
+* Booking requests
+* Approval and rejection workflow
+* Conflict detection
+* Booking tracking
+
+### Incident Ticketing
+
+* Ticket creation
+* Image attachment uploads
+* Ticket assignment
+* Resolution management
+
+### Notifications
+
+* Event-driven notifications
+* Notification preferences
+* Read/unread management
+
+### User Management
+
+* Role management
+* Authentication
+* Authorization
+* User administration
+
+---
 
 ## Prerequisites
 
-Install these before running the project:
+Before running this project, ensure you have installed:
 
-- Java `21`
-- Node.js `18+` recommended, `20+` preferred
-- npm
-- PostgreSQL access, or a working remote PostgreSQL database
+* Java 21
+* Node.js 18+ (20+ recommended)
+* npm
+* PostgreSQL Database
+* Git
 
-## Configuration
+Verify installations:
 
-### Backend configuration
+```bash
+java -version
+node -v
+npm -v
+git --version
+```
 
-Backend configuration is mainly defined in:
+---
 
-- [backend/src/main/resources/application.yml](./backend/src/main/resources/application.yml)
-- [backend/env.properties](./backend/env.properties)
+# Installation Guide
 
-The backend expects:
+## 1. Clone the Repository
 
-- A PostgreSQL database connection
-- Google OAuth credentials for Google sign-in
-- A JWT secret
+```bash
+git clone <your-github-repository-url>
+```
 
-### Recommended local configuration
+Navigate to the project directory:
 
-For local development, keep secrets out of source control and provide your own values.
+```bash
+cd Smart-Campus-Operations-Hub
+```
 
-Create or update `backend/env.properties` like this:
+---
+
+## 2. Configure PostgreSQL Database
+
+Create a PostgreSQL database:
+
+```sql
+CREATE DATABASE smart_campus_db;
+```
+
+Update your database connection settings in:
+
+```text
+backend/src/main/resources/application.yml
+```
+
+Example:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smart_campus_db
+    username: postgres
+    password: your_password
+```
+
+---
+
+## 3. Configure Environment Variables
+
+Create or update:
+
+```text
+backend/env.properties
+```
+
+Example:
 
 ```properties
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
+JWT_SECRET=your_jwt_secret
 ```
 
-If you want to use your own PostgreSQL database instead of the current configured datasource, update `backend/src/main/resources/application.yml` or override Spring datasource properties at runtime.
+---
 
-Important:
+## 4. Configure Frontend Environment
 
-- The frontend expects the backend at `http://localhost:8080`
-- The backend allows CORS from `http://localhost:5173`
-- The frontend API base URL defaults to `http://localhost:8080/api`
+Create:
 
-You can change the frontend API URL by creating `frontend/.env`:
+```text
+frontend/.env
+```
+
+Example:
 
 ```properties
 VITE_API_BASE_URL=http://localhost:8080/api
 ```
 
-## Run the Backend
+---
 
-Open a terminal in the `backend` folder.
+# Running the Application
+
+## Start Backend Server
+
+Navigate to backend:
+
+```bash
+cd backend
+```
 
 ### Windows
 
 ```powershell
-cd backend
 .\mvnw.cmd spring-boot:run
 ```
 
 ### macOS / Linux
 
 ```bash
-cd backend
 ./mvnw spring-boot:run
 ```
 
-The backend will start on:
+Backend runs on:
 
 ```text
 http://localhost:8080
 ```
 
-Useful backend commands:
+---
 
-```powershell
-.\mvnw.cmd test
-.\mvnw.cmd clean package
+## Start Frontend Application
+
+Open a second terminal:
+
+```bash
+cd frontend
 ```
-
-## Run the Frontend
-
-Open a second terminal in the `frontend` folder.
 
 Install dependencies:
 
-```powershell
-cd frontend
+```bash
 npm install
 ```
 
-Start the Vite development server:
+Start development server:
 
-```powershell
+```bash
 npm run dev
 ```
 
-The frontend will start on:
+Frontend runs on:
 
 ```text
 http://localhost:5173
 ```
 
-Other useful frontend commands:
+---
 
-```powershell
-npm run build
-npm run preview
-npm run lint
+## Running the Complete Project
+
+### Terminal 1
+
+```bash
+cd backend
+./mvnw spring-boot:run
 ```
 
-## Recommended Startup Order
+### Terminal 2
 
-1. Start the backend first
-2. Start the frontend second
-3. Open `http://localhost:5173`
-4. Register a local user or sign in with Google OAuth
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## Main Routes
+Open:
 
-### Frontend routes
+```text
+http://localhost:5173
+```
 
-- `/` - Home page
-- `/login` - Login page
-- `/bookings` - User bookings
-- `/admin/bookings` - Admin booking management
-- `/catalogue` - User resource catalogue
-- `/resources` - Admin resource management
-- `/tickets` - User ticket management
-- `/tech/tickets` - Admin or technical ticket area
-- `/preferences` - Notification preferences
+Login using:
 
-### Backend API areas
+* Local account credentials
+* Google OAuth Sign-In
 
-- `/api/auth` - Authentication
-- `/api/resources` - Resource management
-- `/api/bookings` - Booking management
-- `/api/tickets` - Ticket management
-- `/api/users/me/notifications` - Notification inbox
-- `/api/users/me/preferences` - Notification preferences
-- `/api/admin/users` - Admin user management
+---
+
+## API Modules
+
+### Authentication API
+
+```text
+/api/auth
+/oauth2/authorization/google
+```
+
+### Resource Management API
+
+```text
+/api/resources
+```
+
+### Booking Management API
+
+```text
+/api/bookings
+```
+
+### Incident Ticket API
+
+```text
+/api/tickets
+```
+
+### Notifications API
+
+```text
+/notifications
+```
+
+### User Management API
+
+```text
+/api/admin/users
+```
+
+---
 
 ## Testing
 
-Backend tests can be run with:
+### Backend Tests
+
+```bash
+cd backend
+./mvnw test
+```
+
+Windows:
 
 ```powershell
-cd backend
 .\mvnw.cmd test
 ```
 
-Example focused test:
+Specific test:
 
-```powershell
-.\mvnw.cmd -Dtest=ResourceControllerTest test
+```bash
+./mvnw -Dtest=ResourceControllerTest test
 ```
 
-## Notes
+---
 
-- The backend uses Spring Security with stateless JWT authentication
-- Google OAuth redirects back to the frontend after successful login
-- File uploads are stored under the backend `uploads` directory
-- JPA is currently configured with `ddl-auto: update`
-- The current implementation is coursework-oriented and suitable for demo and development use
+### Frontend Build Validation
 
-## Suggested README Usage For Submission
+```bash
+cd frontend
+npm run build
+```
 
-This README is suitable as the main project overview for:
+Additional commands:
 
-- GitHub repository documentation
-- Assignment submission support material
-- Team demo walkthroughs
-- Viva preparation
+```bash
+npm run lint
+npm run preview
+```
 
-If needed, this can be extended later with:
+---
 
-- Screenshots
-- API endpoint tables
-- Database schema diagrams
-- Team member contribution mapping
-- Deployment instructions
+## Additional Features
+
+### Smart Booking Conflict Detection
+
+* Prevents overlapping bookings
+* Suggests available time slots
+* Improves resource utilization
+
+### Ticket Resolution Enforcement
+
+* Admins cannot close tickets without resolution notes
+
+### Resource Expiry Monitoring
+
+* Dashboard alerts for resources nearing expiration
+
+### User Preference Management
+
+* Notification preference customization
+* Personalized alert management
+
+### Password Reset Support
+
+* Local account password recovery functionality
+
+---
+
+## Team Members
+
+| Student ID | Student Name        |
+| ---------- | ------------------- |
+| IT23828834 | T.M.P.B. Dimantha   |
+| IT23823334 | W.M.S. Methara      |
+| IT23664494 | D.M.P. Jayasinghe   |
+| IT23828766 | P.G.R.M. Senarathna |
+
+---
+
+## Academic Information
+
+**Project:** Smart Campus Operations Hub
+
+**Module:** IT3030 – Programming Applications and Frameworks (PAF)
+
+**Institution:** Sri Lanka Institute of Information Technology (SLIIT)
+
+**Academic Year:** 2026
+
+---
+
+## Future Enhancements
+
+* Mobile application support
+* Email and SMS notifications
+* Advanced analytics dashboard
+* AI-powered resource recommendations
+* Calendar integration
+* Real-time technician tracking
+* Predictive maintenance analytics
+
+---
+
+## License
+
+This project was developed for academic and educational purposes as part of the SLIIT IT3030 Programming Applications and Frameworks module.
+
+---
+
+## Repository
+
+GitHub Repository:
+
+```text
+[https://github.com/<your-username>/<your-repository-name>](https://github.com/DimanthaPB/it3030-paf-2026-smart-campus-group_92)
+```
